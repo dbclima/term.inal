@@ -25,18 +25,16 @@ int main(int argc, char **argv) {
     char palavra_chave[6];
 
     // Pessoa 2
-    if (iniciar_teclado(&teclado) != OK) {
+    if (iniciar_teclado(teclado) != OK) {
         
     }
 
     while (continuar_jogo) {
-        sortear_palavra(&palavra_chave); // Pessoa 1
-        continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, &teclado);
+        sortear_palavra(palavra_chave); // Pessoa 1
+        continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, teclado);
     }
-    
-    system("clear");
-    printf("%s\n", BG_AMARELO("Teste"));
-    getchar();
+
+    rotina_fim_de_jogo();
 
     return 0;
 }

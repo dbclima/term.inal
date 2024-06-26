@@ -6,26 +6,28 @@
 #include "palavra.h"
 
 //////////////////////////// Letras ////////////////////////////////
-static void inicializar_letra(Letra *p_letra) {
+
+inline void inicializar_letra(Letra *p_letra) {
     p_letra->cor = NONE;
-    p_letra->a_conteudo[0] = '\0';
+    p_letra->conteudo = '_';
     p_letra->p_proxima = NULL;
 }
 
-static Status preencher_letra(Letra *p_letra, char *p_buffer) {
-    Status status = OK;
+inline void trocar_conteudo_letra(Letra *p_letra, const char buffer) {
+    p_letra->conteudo = buffer;
+}
 
-    if (strlen(p_buffer) != CARACTERES_POR_LETRA) {
-        status = ERRO_TAMANHO_BUFFER;
-        return status;
-    }
+inline void trocar_cor_letra(Letra *p_letra, const Cor cor) {
+    p_letra->cor = cor;
+}
 
-    strncpy(p_letra->a_conteudo, p_buffer, CARACTERES_POR_LETRA);
-    return status;
+static void converter_letra_string(Letra *p_letra, char *p_buffer) {
+    // Implementacao Diogo
 }
 
 //////////////////////////// Palavras ////////////////////////////
-void inicializar_palavra(Palavra *p_palavra) {
+
+inline void inicializar_palavra(Palavra *p_palavra) {
     p_palavra->p_primeira_letra = NULL;
 }
 
@@ -67,10 +69,7 @@ static Status adicionar_letra_em_palavra(Palavra *p_palavra, Letra letra) {
     inicializar_letra(verificador);
 
     // preenchemos a letra interna com os valores da letra passada por parametro
-    status = preencher_letra(verificador, letra.a_conteudo);
-    if (status != OK) {
-        return status;
-    }
+    trocar_conteudo_letra(verificador, letra.conteudo);
 
     return status;
 }
@@ -78,7 +77,6 @@ static Status adicionar_letra_em_palavra(Palavra *p_palavra, Letra letra) {
 Status preencher_palavra(Palavra *p_palavra, char *p_buffer) {
     Status status = OK;
     Letra letra_auxiliar;
-    char string_auxiliar[4] = BG_NONE("_");
 
     if (strlen(p_buffer) > MAXIMO_LETRAS_POR_PALAVRA + 1) {
         status = ERRO_OVERFLOW_PALAVRA;
@@ -91,8 +89,7 @@ Status preencher_palavra(Palavra *p_palavra, char *p_buffer) {
     deletar_palavra(p_palavra);
 
     for (int i = 0; i < strlen(p_buffer); i++) {
-        string_auxiliar[1] = p_buffer[i];
-        preencher_letra(&letra_auxiliar, string_auxiliar);
+        trocar_conteudo_letra(&letra_auxiliar, p_buffer[i]);
         status = adicionar_letra_em_palavra(p_palavra, letra_auxiliar);
 
         if (status != OK) {
@@ -103,4 +100,20 @@ Status preencher_palavra(Palavra *p_palavra, char *p_buffer) {
     return status;
 }
 
+int get_tamanho_palavra(Palavra *p_palavra) {
+    int contador = 0;
+    Letra *letra_auxiliar;
 
+    letra_auxiliar = p_palavra->p_primeira_letra;
+
+    while (letra_auxiliar != NULL) {
+        contador++;
+        letra_auxiliar = letra_auxiliar->p_proxima;
+    }
+
+    return contador;
+}
+
+void converter_palavra_string(Palavra *p_palavra, char *p_buffer) {
+    // Implementacao Diogo
+}
