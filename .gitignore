@@ -1,0 +1,5 @@
+# Ignorando arquivo executavel
+bin/*
+
+# Ignorando arquivos objeto
+build/*
