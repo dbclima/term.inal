@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 
 #include "config.h"
 #include "types.h"
@@ -22,7 +23,24 @@ inline void trocar_cor_letra(Letra *p_letra, const Cor cor) {
 }
 
 static void converter_letra_string(Letra *p_letra, char *p_buffer) {
-    // Implementacao Diogo
+    char modificador_cor_entrada, modificador_cor_saida;
+    modificador_cor_saida = BG_NONE_FG_NONE;
+    
+    switch(p_letra->cor) {
+        case NONE:
+            modificador_cor_entrada = BG_NONE_FG_BRANCO;
+            break;
+        
+        case AMARELO:
+            modificador_cor_entrada = BG_AMARELO_FG_BRANCO;
+            break;
+        
+        case VERDE:
+            modificador_cor_entrada = BG_VERDE_FG_BRANCO;
+            break; 
+    }
+
+    snprintf(p_buffer, CARACTERES_POR_LETRA + 1, "%c%c%c", modificador_cor_entrada, p_letra->conteudo, modificador_cor_saida);
 }
 
 //////////////////////////// Palavras ////////////////////////////
@@ -32,44 +50,44 @@ inline void inicializar_palavra(Palavra *p_palavra) {
 }
 
 void deletar_palavra(Palavra *p_palavra) {
-    Letra *auxiliar;
+    Letra *letra_auxiliar;
 
     // Iterando ate a ultima letra
     while (p_palavra->p_primeira_letra != NULL) {
-        auxiliar = p_palavra->p_primeira_letra;
-        p_palavra->p_primeira_letra = auxiliar->p_proxima;
-        free(auxiliar);
+        letra_auxiliar = p_palavra->p_primeira_letra;
+        p_palavra->p_primeira_letra = letra_auxiliar->p_proxima;
+        free(letra_auxiliar);
     }
 }
 
 static Status adicionar_letra_em_palavra(Palavra *p_palavra, Letra letra) {
     Status status = OK;
     
-    Letra *verificador;
-    verificador = p_palavra->p_primeira_letra;
+    Letra *letra_auxiliar;
+    letra_auxiliar = p_palavra->p_primeira_letra;
     int contador = 0;
     
     // Encontramos a ultima letra da lista
-    while (verificador != NULL) {
+    while (letra_auxiliar != NULL) {
         if (contador++ == MAXIMO_LETRAS_POR_PALAVRA) {
             status = ERRO_OVERFLOW_PALAVRA;
             return status;
         }
-        verificador = verificador->p_proxima;
+        letra_auxiliar = letra_auxiliar->p_proxima;
     }
 
     // Alocamos espaco para a nova letra
-    verificador = (Letra*) malloc(sizeof(Letra));
-    if (verificador == NULL) {
+    letra_auxiliar = (Letra*) malloc(sizeof(Letra));
+    if (letra_auxiliar == NULL) {
         status = ERRO_ALOCACAO_MEMORIA;
         return status;
     }
 
     // Inicializamos a letra com valores default
-    inicializar_letra(verificador);
+    inicializar_letra(letra_auxiliar);
 
     // preenchemos a letra interna com os valores da letra passada por parametro
-    trocar_conteudo_letra(verificador, letra.conteudo);
+    trocar_conteudo_letra(letra_auxiliar, letra.conteudo);
 
     return status;
 }
@@ -115,5 +133,14 @@ int get_tamanho_palavra(Palavra *p_palavra) {
 }
 
 void converter_palavra_string(Palavra *p_palavra, char *p_buffer) {
-    // Implementacao Diogo
+    char string_auxiliar[4];
+    Letra *letra_auxiliar;
+
+    letra_auxiliar = p_palavra->p_primeira_letra;
+
+    while (letra_auxiliar != NULL) {
+        converter_letra_string(letra_auxiliar, string_auxiliar);
+        strncat(p_buffer, string_auxiliar, CARACTERES_POR_LETRA);
+        letra_auxiliar = letra_auxiliar->p_proxima;
+    }
 }
