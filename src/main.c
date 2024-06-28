@@ -17,6 +17,17 @@
 int main(int argc, char **argv) {
     // Tratar argumentos do programa
     // Pessoa 1
+    Status status = OK;
+    if(argc > 1){
+        if(!strcmp(argv[1], "--add")){
+            for(int i = 2; i < argc; i++){
+                status = inserirpalavra(argv[i]);
+                if(status != OK){
+                    
+                }
+            }
+        }
+    }
 
     Bool continuar_jogo = TRUE;
     int numero_tentativas = capturar_dificuldade();

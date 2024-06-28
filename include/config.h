@@ -16,9 +16,9 @@
 #define TECLAS_SEGUNDA_FILEIRA          "asdfghjkl"
 #define TECLAS_TERCEIRA_FILEIRA         "zxcvbnm"    // Letras teclado em ordem
 
+#define ARQUIVO_PALAVRAS                "res/palavras.txt" // Arquivo utilizado para armazenar as palavras do jogo
 
+#define DEFAULT_CARACTERE               BG_NONE("_")
 
-#define DEFAULT_CARACTERE   BG_NONE("_")
-
-#define OFFSET_TECLADO      "                            "
-#define OFFSET_PALAVRAS     OFFSET_TECLADO "       "
+#define OFFSET_TECLADO                  "                            "
+#define OFFSET_PALAVRAS                 OFFSET_TECLADO "       "
