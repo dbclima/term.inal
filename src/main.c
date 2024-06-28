@@ -5,6 +5,7 @@
 #include "config.h"
 #include "types.h"
 #include "palavra.h"
+#include "interface.h"
 
 /*
  * Pessoa 1: Joao Binda
@@ -20,18 +21,18 @@ int main(int argc, char **argv) {
     Bool continuar_jogo = TRUE;
     int numero_tentativas = capturar_dificuldade();
     Palavra *p_palavras = (Palavra*) malloc(sizeof(Palavra) * numero_tentativas);
-    Letra teclado[26];
+    Palavra p_teclado;
 
     char palavra_chave[6];
 
     // Pessoa 2
-    if (iniciar_teclado(teclado) != OK) {
+    if (iniciar_teclado(&p_teclado) != OK) {
         
     }
 
     while (continuar_jogo) {
         sortear_palavra(palavra_chave); // Pessoa 1
-        continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, teclado);
+        continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, &p_teclado);
     }
 
     rotina_fim_de_jogo();
@@ -49,25 +50,25 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         tentativa_atual++;
         system("clear");
         
-        // Pessoa 4
+        // Pessoa 4 - Feito
         for (int i = 0; i < tentativa_atual; i++) {
-            printar_palavra(p_palavras[i]);
+            printar_palavra(&p_palavras[i], OFFSET_PALAVRAS, FALSE);
         }
 
-        // Pessoa 4
-        printar_teclado(teclado);
+        // Pessoa 4 - Feito
+        printar_teclado(teclado, OFFSET_TECLADO);
         printar_warning(buffer_warning);
 
         // Pessoa 3
         warning = receber_input_usuario();
         if (warning) {
-                if (warning % PALAVRA_REPETIDA) {
+                if (warning % PALAVRA_REPETIDA == 0) {
                     concatenar(buffer_warning, "Repetiu palavra\n");
                 }
-                if (warning % NUMERO_LETRAS_INVALIDO) {
+                if (warning % NUMERO_LETRAS_INVALIDO == 0) {
                     concatenar(buffer_warning, "foi detectada o numero de letras invalido\n");
                 }
-                if (warning % CARACTERE_INVALIDO) {
+                if (warning % CARACTERE_INVALIDO == 0) {
                     concatenar(buffer_warning, "Foi detectado um caractere invalido\n");
                 }
             }
@@ -75,12 +76,13 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
 
         // Pessoa 2
         if (processar_nova_palavra(teclado)) {
-            // Pessoa 4
+            
+            // Pessoa 4 - Feito
             rotina_vitoria();
             return jogar_novamente();
         }
     
-    // Pessoa 4
+    // Pessoa 4 - Feito
     rotina_derrota();
     return jogar_novamente();
 }
