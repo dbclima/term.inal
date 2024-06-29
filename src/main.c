@@ -8,22 +8,35 @@
 #include "interface.h"
 
 /*
- * Pessoa 1: Joao Binda
- * Pessoa 2: Antonio Predo
+ * Pessoa 1: Joo Binda - feito
+ * Pessoa 2: Antonio Predo Corra
  * Pessoa 3: Sylvio
- * Pessoa 4: Diogo
+ * Pessoa 4: Diogo Corra Lima - feito
  */
 
 int main(int argc, char **argv) {
     // Tratar argumentos do programa
-    // Pessoa 1
+    // Pessoa 1 - feito
     Status status = OK;
     if(argc > 1){
         if(!strcmp(argv[1], "--add")){
             for(int i = 2; i < argc; i++){
                 status = inserirpalavra(argv[i]);
                 if(status != OK){
-                    
+                    switch(status){
+                        case ERRO_ABERTURA_ARQUIVO:
+                            printf("Erro de abertura de arquivo. \n");
+                            exit(ERRO_ABERTURA_ARQUIVO);
+                        case ERRO_TAMANHO_PALAVRA:
+                            printf("Erro de tamanho de palavra. \n Digite palavras de somente 5 letras. \n");
+                            break;
+                        case ERRO_CARACTER_INVALIDO:
+                            printf("Erro de caracter invalido. \n Nao digite caracteres especiais. \n");
+                            break;
+                        case ERRO_PALAVRA_REPETIDA:
+                            printf("Erro de palavra repetida. \n");
+                            break;
+                    }
                 }
             }
         }
@@ -42,7 +55,7 @@ int main(int argc, char **argv) {
     }
 
     while (continuar_jogo) {
-        sortear_palavra(palavra_chave); // Pessoa 1
+        sortear_palavra(palavra_chave); // Pessoa 1 - feito
         continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, &p_teclado);
     }
 
