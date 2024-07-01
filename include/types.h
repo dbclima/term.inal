@@ -22,6 +22,8 @@ typedef enum {
     ERRO_TAMANHO_PALAVRA,
     ERRO_CARACTER_INVALIDO,
     ERRO_PALAVRA_REPETIDA,
+    ERRO_CHAMADA_INVALIDA,
+    ERRO_ARQUIVO_VAZIO,
 } Status;
 
 typedef enum {
