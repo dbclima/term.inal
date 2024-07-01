@@ -15,3 +15,5 @@ Bool jogar_novamente();
 // Funcao que exibe o warning referente a ultima jogada
 void printar_warning(char *p_buffer_warning);
 
+// Funcao que recebe o input do usuario e relata eventuais erros
+void receber_input_usuario(char *tentativa, char *p_buffer_warning);

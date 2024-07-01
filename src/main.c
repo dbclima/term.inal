@@ -45,13 +45,14 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
     int warning;
     int tentativa_atual = 0;
     char buffer_warning[200] = "";
+    char tentativa[200] = "";
 
     while(tentativa_atual < numero_tentativas) {
         tentativa_atual++;
         system("clear");
         
         // Pessoa 4 - Feito
-        for (int i = 0; i < tentativa_atual; i++) {
+        for (int i = 0; i < tentativa_atual; i++) {""
             printar_palavra(&p_palavras[i], OFFSET_PALAVRAS, FALSE);
         }
 
@@ -60,19 +61,7 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         printar_warning(buffer_warning);
 
         // Pessoa 3
-        warning = receber_input_usuario();
-        if (warning) {
-                if (warning % PALAVRA_REPETIDA == 0) {
-                    concatenar(buffer_warning, "Repetiu palavra\n");
-                }
-                if (warning % NUMERO_LETRAS_INVALIDO == 0) {
-                    concatenar(buffer_warning, "foi detectada o numero de letras invalido\n");
-                }
-                if (warning % CARACTERE_INVALIDO == 0) {
-                    concatenar(buffer_warning, "Foi detectado um caractere invalido\n");
-                }
-            }
-        }
+        receber_input_usuario(tentativa, buffer_warning);
 
         // Pessoa 2
         if (processar_nova_palavra(teclado)) {
