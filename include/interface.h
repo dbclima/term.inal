@@ -16,4 +16,4 @@ Bool jogar_novamente();
 void printar_warning(char *p_buffer_warning);
 
 // Funcao que recebe o input do usuario e relata eventuais erros
-void receber_input_usuario(char *tentativa, char *p_buffer_warning);
+int receber_input_usuario(char *tentativa, char *p_buffer_warning);
