@@ -82,3 +82,7 @@ Status printar_palavra(Palavra *p_palavra, char *p_buffer_offset, Bool espaco_en
 Status printar_teclado(Palavra *p_teclado, char* p_buffer_offset);
     // p_teclado = ponteiro para o teclado
     // p_buffer_offset = ponteiro para o buffer de offset (formatacao)
+
+Status iniciar_teclado(Palavra *p_teclado);
+
+Bool processar_nova_palavra(Palavra *p_teclado, char *palavra_chave, char *palavraTentativa, Palavra*palavra_fim);

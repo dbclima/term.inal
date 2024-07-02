@@ -82,7 +82,7 @@ Status adicionar_letra_em_palavra(Palavra *p_palavra, Letra letra) {
     letra_auxiliar->p_proxima = p_palavra->p_primeira_letra;
     p_palavra->p_primeira_letra = letra_auxiliar;
 
-    return status;
+    return status; 
 }
 
 Status preencher_palavra(Palavra *p_palavra, char *p_buffer) {
@@ -191,4 +191,109 @@ Status printar_teclado(Palavra *p_teclado, char* p_buffer_offset) {
     }
 
     return status;
+}
+
+Status iniciar_teclado(Palavra *p_teclado){
+
+    if(p_teclado == NULL){
+        return ERRO_ALOCACAO_MEMORIA;
+    } 
+
+    char *stringPrimeiraFileira = TECLAS_PRIMEIRA_FILEIRA;
+    char *stringSegundaFileira = TECLAS_SEGUNDA_FILEIRA;
+    char *stringTerceiraFileira = TECLAS_TERCEIRA_FILEIRA;
+    Palavra primeiraFileira, segundaFileira, terceiraFileira;
+
+    inicializar_palavra(&primeiraFileira);
+    inicializar_palavra(&segundaFileira);
+    inicializar_palavra(&terceiraFileira);
+
+    preencher_palavra(&primeiraFileira, stringPrimeiraFileira);
+    preencher_palavra(&segundaFileira, stringSegundaFileira);
+    preencher_palavra(&terceiraFileira, stringTerceiraFileira);
+
+    Letra *letraAuxiliar1;
+    letraAuxiliar1 = primeiraFileira.p_primeira_letra;
+    for (int i = 0; i < get_tamanho_palavra(&primeiraFileira); i++)
+    {
+        letraAuxiliar1->cor = NONE;
+        letraAuxiliar1 = letraAuxiliar1->p_proxima;
+    }
+
+    Letra *letraAuxiliar2;
+    letraAuxiliar2 = primeiraFileira.p_primeira_letra;
+    for (int i = 0; i < get_tamanho_palavra(&segundaFileira);i++){
+        letraAuxiliar2->cor = NONE;
+        letraAuxiliar2 = letraAuxiliar2->p_proxima;
+    }
+
+    Letra *letraAuxiliar3;
+    letraAuxiliar3 = primeiraFileira.p_primeira_letra;
+    for (int i = 0; i < get_tamanho_palavra(&terceiraFileira);i++){
+        letraAuxiliar3->cor = NONE;
+        letraAuxiliar3 = letraAuxiliar3->p_proxima;
+    }
+
+    p_teclado[0] = primeiraFileira;
+    p_teclado[1] = segundaFileira;
+    p_teclado[2] = terceiraFileira;
+
+    return OK;
+};
+
+Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palavraTentativa,Palavra*palavra_fim){
+
+    Palavra palavraTentativaOriginal;
+
+    inicializar_palavra(&palavraTentativaOriginal);
+    preencher_palavra(&palavraTentativaOriginal, palavraTentativa);
+    preencher_palavra(palavra_fim, palavraTentativa);
+
+    char *palavraChaveAtual = palavra_chave;
+
+    Letra *letraAuxiliarVerde;
+    letraAuxiliarVerde = palavraTentativaOriginal.p_primeira_letra;
+
+    for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
+        if(palavraChaveAtual[i] == letraAuxiliarVerde->conteudo){
+            trocar_cor_letra_em_palavra(palavra_fim, VERDE, i);
+            trocar_conteudo_letra(letraAuxiliarVerde, '_');
+            palavraChaveAtual[i] = '-';
+        }
+            letraAuxiliarVerde = letraAuxiliarVerde->p_proxima;
+    }
+
+    printar_palavra(&palavraTentativaOriginal, "", FALSE);
+
+    Letra *letraAuxiliarAmarelo;
+    letraAuxiliarAmarelo = palavraTentativaOriginal.p_primeira_letra;
+
+    for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
+            letraAuxiliarAmarelo = palavraTentativaOriginal.p_primeira_letra;
+        for (int j = 0; j < get_tamanho_palavra(&palavraTentativaOriginal);j++){
+            if (palavraChaveAtual[i] == letraAuxiliarAmarelo->conteudo)
+            {
+                trocar_cor_letra_em_palavra(palavra_fim, AMARELO, j);
+                trocar_conteudo_letra(letraAuxiliarAmarelo, '_');
+                break;
+            }
+            letraAuxiliarAmarelo = letraAuxiliarAmarelo->p_proxima;
+        }
+    }
+    printar_palavra(&palavraTentativaOriginal, "", FALSE);
+
+
+    int contador = 0;
+
+    for (int i = 0; i < get_tamanho_palavra(palavraTentativa);i++){
+        if(palavraTentativaOriginal.p_primeira_letra->cor == VERDE){
+            contador++;
+        }
+    }
+
+    if(contador == 5){
+        return TRUE;
+    }
+
+    return FALSE;
 }
