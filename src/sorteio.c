@@ -17,13 +17,15 @@ Status sortear_palavra(char* palavra_chave){
         return status;
     }
 
-    tam = fseek(f, 0, SEEK_END);
+    fseek(f, 0, SEEK_END);
+    tam = (int)ftell(f);
     tam = tam/(sizeof(char)*6);
     if(tam == 0){
         status = ERRO_ARQUIVO_VAZIO;
         printf("Nao existem palavras dentro do arquivo");
         return status;
     }
+    
     pos = rand()%tam;
     pos = pos*(sizeof(char)*6);
 
@@ -35,55 +37,97 @@ Status sortear_palavra(char* palavra_chave){
     return status;
 }
 
-Status inserirpalavra(char* palavra){
+Status inserirpalavra(char* palavra) {
     Status status = OK;
 
-    if(strlen(palavra) == 6){
+    if(strlen(palavra) != 5){
         status = ERRO_TAMANHO_PALAVRA;
         return status;
     }
+
     for(int i = 0; i < 5; i++){
-        if((palavra[i] < 65) || ((palavra[i] > 90) && (palavra[i] < 97)) || (palavra[i] > 123)){
+        if((palavra[i] < 65) || (palavra[i] > 90 && palavra[i] < 97) || (palavra[i] > 122)){
             status = ERRO_CARACTER_INVALIDO;
             return status;
         }
     }
 
     FILE* f;
+    FILE* au;
     int tam, aux;
     char compara[6];
-    f = fopen(ARQUIVO_PALAVRAS, "r");
-    if(f == NULL){
+    compara[5] = '\0';
+
+    au = fopen(ARQUIVO_AUXILIAR, "w+");
+    if(au == NULL){
         status = ERRO_ABERTURA_ARQUIVO;
         return status;
     }
 
-    tam = fseek(f, 0, SEEK_END);
-    tam = tam/(sizeof(char)*6);
-    rewind(f);
-    if(tam == 0){
-        puts("entrou aqui");
-        //fwrite(palavra, sizeof(char), 5, f);
-        //fwrite("\n", sizeof(char), 1, f);
-        fprintf(f, "%s", palavra);
-        
+    f = fopen(ARQUIVO_PALAVRAS, "r+");
+    if(f == NULL){
+        fclose(au);
+        status = ERRO_ABERTURA_ARQUIVO;
+        return status;
     }
+
+    fseek(f, 0, SEEK_END);
+    tam = (int)ftell(f);
+    tam = tam / (sizeof(char) * 6);
+    rewind(f);
+    long int posi;
+
     for(int i = 0; i < tam; i++){
-        fscanf(f, "%s", compara);
+        fread(compara, sizeof(char), 5, f);
+        fgetc(f);
         aux = strcmp(palavra, compara);
+
         if(aux == 0){
             status = ERRO_PALAVRA_REPETIDA;
             fclose(f);
+            fclose(au);
             return status;
         }
-        else if(aux > 0){
-            fseek(f, -(sizeof(char)*6), SEEK_CUR);
-            fwrite(palavra, sizeof(char), 5, f);
-            fwrite("\n", sizeof(char), 1, f);
+        else if(aux < 0){
+            posi = ftell(f) - 6; 
+            fwrite(palavra, sizeof(char), 5, au);
+            fwrite("\n", sizeof(char), 1, au);
+            fwrite(compara, sizeof(char), 5, au);
+            fwrite("\n", sizeof(char), 1, au);
+
+            while(fread(compara, sizeof(char), 5, f) == 5){
+                fgetc(f);
+                fwrite(compara, sizeof(char), 5, au);
+                fwrite("\n", sizeof(char), 1, au);
+            }
+
+            rewind(au);
+            fseek(f, posi, SEEK_SET);
+
+            while(fread(compara, sizeof(char), 5, au) == 5){
+                fgetc(au);
+                fwrite(compara, sizeof(char), 5, f);
+                fwrite("\n", sizeof(char), 1, f);
+            }
+
+            fclose(f);
+            fclose(au);
+            return status;
         }
-        else continue;
+    }
+
+    fwrite(palavra, sizeof(char), 5, f);
+    fwrite("\n", sizeof(char), 1, f);
+
+    rewind(au);
+    while(fread(compara, sizeof(char), 5, au) == 5){
+        fgetc(au);
+        fwrite(compara, sizeof(char), 5, f);
+        fwrite("\n", sizeof(char), 1, f);
     }
 
     fclose(f);
+    fclose(au);
+
     return status;
 }

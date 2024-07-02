@@ -17,6 +17,7 @@
 #define TECLAS_TERCEIRA_FILEIRA         "zxcvbnm"    // Letras teclado em ordem
 
 #define ARQUIVO_PALAVRAS                "res/palavras.txt" // Arquivo utilizado para armazenar as palavras do jogo
+#define ARQUIVO_AUXILIAR                "res/auxiliar.txt"
 
 #define DEFAULT_CARACTERE               BG_NONE("_")
 
