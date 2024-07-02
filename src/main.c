@@ -61,7 +61,10 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         printar_warning(buffer_warning);
 
         // Pessoa 3
-        receber_input_usuario(tentativa, buffer_warning);
+        if(receber_input_usuario(tentativa, buffer_warning) != 0){
+            tentativa_atual--;
+            continue;
+        }
 
         // Pessoa 2
         if (processar_nova_palavra(teclado)) {
