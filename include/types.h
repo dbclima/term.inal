@@ -20,10 +20,3 @@ typedef enum {
     ERRO_TECLAS_TECLADO,
     ERRO_INDICE_FORA_DE_ALCANCE,
 } Status;
-
-typedef enum {
-    NO_WARNINGS = 1,
-    PALAVRA_REPETIDA = 2,
-    NUMERO_LETRAS_INVALIDO = 3,
-    CARACTERE_INVALIDO = 5,
-} Warning;

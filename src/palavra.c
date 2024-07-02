@@ -241,13 +241,14 @@ Status iniciar_teclado(Palavra *p_teclado){
     return OK;
 };
 
-Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palavraTentativa,Palavra*palavra_fim){
+Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palavraTentativa, Palavra *p_palavras, int tentativaAtual){
 
     Palavra palavraTentativaOriginal;
+    Palavra palavra_fim;
 
     inicializar_palavra(&palavraTentativaOriginal);
     preencher_palavra(&palavraTentativaOriginal, palavraTentativa);
-    preencher_palavra(palavra_fim, palavraTentativa);
+    preencher_palavra(&palavra_fim, palavraTentativa);
 
     char *palavraChaveAtual = palavra_chave;
 
@@ -256,7 +257,7 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
 
     for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
         if(palavraChaveAtual[i] == letraAuxiliarVerde->conteudo){
-            trocar_cor_letra_em_palavra(palavra_fim, VERDE, i);
+            trocar_cor_letra_em_palavra(&palavra_fim, VERDE, i);
             trocar_conteudo_letra(letraAuxiliarVerde, '_');
             palavraChaveAtual[i] = '-';
         }
@@ -273,7 +274,7 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
         for (int j = 0; j < get_tamanho_palavra(&palavraTentativaOriginal);j++){
             if (palavraChaveAtual[i] == letraAuxiliarAmarelo->conteudo)
             {
-                trocar_cor_letra_em_palavra(palavra_fim, AMARELO, j);
+                trocar_cor_letra_em_palavra(&palavra_fim, AMARELO, j);
                 trocar_conteudo_letra(letraAuxiliarAmarelo, '_');
                 break;
             }
@@ -285,7 +286,9 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
 
     int contador = 0;
 
-    for (int i = 0; i < get_tamanho_palavra(palavraTentativa);i++){
+    p_palavras[tentativaAtual] = palavra_fim;
+
+    for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
         if(palavraTentativaOriginal.p_primeira_letra->cor == VERDE){
             contador++;
         }

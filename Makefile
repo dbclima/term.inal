@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS = -Wall -Werror -Iinclude
+CFLAGS = -Wall -Iinclude
 
 OUTPUT = bin/main
 

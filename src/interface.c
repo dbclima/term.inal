@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
-
+#include <string.h>
 #include "types.h"
 #include "config.h"
 
@@ -40,7 +40,7 @@ void printar_warning(char *p_buffer_warning) {
 }
 
 // Retorna 0 se não houver erro
-void receber_input_usuario(char *tentativa, char* p_buffer_warning) {
+int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
     int erro = 0;
     printf("Digite uma tentativa de palavra: ");
     gets(tentativa);
