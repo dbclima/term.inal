@@ -53,6 +53,8 @@ void inicializar_palavra(Palavra *p_palavra) {
 void deletar_palavra(Palavra *p_palavra) {
     Letra *letra_auxiliar;
 
+    printf("%p <- \n", p_palavra->p_primeira_letra);
+
     // Iterando ate a ultima letra
     while (p_palavra->p_primeira_letra != NULL) {
         letra_auxiliar = p_palavra->p_primeira_letra;
@@ -246,6 +248,7 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
     Palavra palavraTentativaOriginal;
     Palavra palavra_fim;
 
+    inicializar_palavra(&palavra_fim); //esse q faltou
     inicializar_palavra(&palavraTentativaOriginal);
     preencher_palavra(&palavraTentativaOriginal, palavraTentativa);
     preencher_palavra(&palavra_fim, palavraTentativa);

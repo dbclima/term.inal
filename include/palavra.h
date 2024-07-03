@@ -85,4 +85,4 @@ Status printar_teclado(Palavra *p_teclado, char* p_buffer_offset);
 
 Status iniciar_teclado(Palavra *p_teclado);
 
-Bool processar_nova_palavra(Palavra *p_teclado, char *palavra_chave, char *palavraTentativa,Palavra *p_palavras, int tentativaAtual);
+Bool processar_nova_palavra(Palavra *p_teclado, char *palavra_chave, char *palavraTentativa, Palavra *p_palavras, int tentativaAtual);

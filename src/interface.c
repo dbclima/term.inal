@@ -31,19 +31,22 @@ Bool jogar_novamente() {
             retorno = FALSE;
             break;
     }
+    getchar();
 
     return retorno;
 }
 
 void printar_warning(char *p_buffer_warning) {
     printf("\n%s%s%s\n", BG_NONE_FG_VERMELHO, p_buffer_warning, BG_NONE_FG_NONE);
+    p_buffer_warning[0] = '\0';
 }
 
 // Retorna 0 se não houver erro
 int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
     int erro = 0;
     printf("Digite uma tentativa de palavra: ");
-    gets(tentativa);
+    fscanf(stdin, "%[^\n]", tentativa);
+    getchar();
 
     // Detecção de erro de palavra repetida
     if(0 == 1){
@@ -65,5 +68,6 @@ int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
             break;
         }
     }
+
     return erro;
 }

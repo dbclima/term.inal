@@ -44,29 +44,39 @@ int main(int argc, char **argv) {
 }
 
 Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, Palavra *p_teclado) {
-    Bool retorno = TRUE;
     int tentativa_atual = 0;
     char buffer_warning[200] = "";
     char tentativa[200] = "";
+    int qtde_erros = 0;
 
     while(tentativa_atual < numero_tentativas) {
         system("clear");
+        strcpy(tentativa, "");
+        //printf("%d %d\n", tentativa_atual, numero_tentativas);
         
         // Pessoa 4 - Feito
         for (int i = 0; i < tentativa_atual; i++) {
             printar_palavra(&p_palavras[i], OFFSET_PALAVRAS, FALSE);
         }
 
+        for (int i = tentativa_atual; i < numero_tentativas; i++) {
+            printf("%s_____\n", OFFSET_PALAVRAS);
+        }
+
+        printf("\n");
+
         // Pessoa 4 - Feito
         printar_teclado(p_teclado, OFFSET_TECLADO);
         printar_warning(buffer_warning);
 
+        for (int i = qtde_erros; i < 2; i++) {
+            printf("\n");
+        }        
+
         // Pessoa 3
-        if(receber_input_usuario(tentativa, buffer_warning) != 0){
+        if((qtde_erros = receber_input_usuario(tentativa, buffer_warning)) != 0){
             continue;
         }
-
-
         
         // Pessoa 2
         if (processar_nova_palavra(p_teclado, palavra_chave,tentativa, p_palavras,tentativa_atual)) {
@@ -75,13 +85,11 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
             rotina_vitoria();
             return jogar_novamente();
         }
-    tentativa_atual++;
+        tentativa_atual++;
+    
+    }
     
     // Pessoa 4 - Feito
     rotina_derrota();
     return jogar_novamente();
-    }
-
-    return retorno;
-
-    };
+}
