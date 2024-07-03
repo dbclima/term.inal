@@ -247,13 +247,16 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
 
     Palavra palavraTentativaOriginal;
     Palavra palavra_fim;
+    int contador = 0;
 
     inicializar_palavra(&palavra_fim); //esse q faltou
     inicializar_palavra(&palavraTentativaOriginal);
     preencher_palavra(&palavraTentativaOriginal, palavraTentativa);
     preencher_palavra(&palavra_fim, palavraTentativa);
 
-    char *palavraChaveAtual = palavra_chave;
+    char palavraChaveAtual[6];
+
+    strcpy(palavraChaveAtual, palavra_chave);
 
     Letra *letraAuxiliarVerde;
     letraAuxiliarVerde = palavraTentativaOriginal.p_primeira_letra;
@@ -263,6 +266,7 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
             trocar_cor_letra_em_palavra(&palavra_fim, VERDE, i);
             trocar_conteudo_letra(letraAuxiliarVerde, '_');
             palavraChaveAtual[i] = '-';
+            contador++;
         }
             letraAuxiliarVerde = letraAuxiliarVerde->p_proxima;
     }
@@ -287,15 +291,9 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
     printar_palavra(&palavraTentativaOriginal, "", FALSE);
 
 
-    int contador = 0;
 
     p_palavras[tentativaAtual] = palavra_fim;
 
-    for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
-        if(palavraTentativaOriginal.p_primeira_letra->cor == VERDE){
-            contador++;
-        }
-    }
 
     if(contador == 5){
         return TRUE;
