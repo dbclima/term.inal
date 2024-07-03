@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "config.h"
 #include "types.h"
@@ -17,6 +18,7 @@ Status sortear_palavra(char* palavra_chave){
         return status;
     }
 
+    srand(time(NULL));
     fseek(f, 0, SEEK_END);
     tam = (int)ftell(f);
     tam = tam/(sizeof(char)*6);
