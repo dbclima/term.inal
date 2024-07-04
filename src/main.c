@@ -87,6 +87,10 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
     char buffer_warning[200] = "";
     char tentativa[200] = "";
     int qtde_erros = 0;
+    int flag_endgame = 0;
+
+    deletar_teclado(p_teclado);
+    iniciar_teclado(p_teclado);
 
     while(tentativa_atual < numero_tentativas) {
         system("clear");
@@ -112,6 +116,12 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
             printf("\n");
         }        
 
+        if (flag_endgame) {
+            if (flag_endgame == -1) rotina_derrota();
+            else rotina_vitoria();
+            return jogar_novamente();
+        }
+
         // Pessoa 3
         if((qtde_erros = receber_input_usuario(tentativa, buffer_warning, p_palavras, tentativa_atual)) != 0){
             continue;
@@ -121,14 +131,16 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         if (processar_nova_palavra(p_teclado, palavra_chave,tentativa, p_palavras,tentativa_atual)) {
             
             // Pessoa 4 - Feito
-            rotina_vitoria();
-            return jogar_novamente();
+            
+            flag_endgame = 1;
         }
         tentativa_atual++;
+
+        if (tentativa_atual == numero_tentativas) {
+            flag_endgame = -1;
+            tentativa_atual--;
+        }
     
     }
-    
-    // Pessoa 4 - Feito
-    rotina_derrota();
-    return jogar_novamente();
+    return FALSE;
 }

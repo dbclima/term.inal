@@ -56,8 +56,6 @@ void inicializar_palavra(Palavra *p_palavra) {
 void deletar_palavra(Palavra *p_palavra) {
     Letra *letra_auxiliar;
 
-    printf("%p <- \n", p_palavra->p_primeira_letra);
-
     // Iterando ate a ultima letra
     while (p_palavra->p_primeira_letra != NULL) {
         letra_auxiliar = p_palavra->p_primeira_letra;
@@ -174,7 +172,6 @@ void trocar_cor_letra_em_teclado_char(Palavra *p_palavra, Cor cor, char c){
         {
             if ((p_letra_auxiliar->conteudo == c) && (p_letra_auxiliar->cor != VERDE))
             {
-                printf("entrou");
                 trocar_cor_letra(p_letra_auxiliar, cor);
                 return;
             }
@@ -330,10 +327,8 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
 
 
     if(contador == 5){
-        iniciar_teclado(p_teclado);
         return TRUE;
     }
-
 
     return FALSE;
 }

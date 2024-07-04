@@ -11,6 +11,10 @@
 int capturar_dificuldade(){
     int num_tentativas = -1;
     while(num_tentativas < 3 || num_tentativas > 20){
+
+        system("clear");
+        printar_titulo_jogo();
+        printf("\n\n");
         printf("Digite o numero de tentativas (entre 3 e 20): ");
         scanf("%d", &num_tentativas);
         
@@ -87,13 +91,11 @@ int receber_input_usuario(char *tentativa, char *p_buffer_warning, Palavra *p_pa
 }
 
 void rotina_vitoria() {
-    system("clear");
-    printf("\n\n\n%sVitoria!\n\n\n\n", OFFSET_PALAVRAS);
+    printf("%sVitoria!%s ", BG_VERDE_FG_BRANCO, BG_NONE_FG_NONE);
 }
 
 void rotina_derrota() {
-    system("clear");
-    printf("\n\n\n%sDerrota!\n\n\n\n", OFFSET_PALAVRAS);
+    printf("%sDerrota!%s ", BG_VERMELHO_FG_BRANCO, BG_NONE_FG_NONE);
 }
 
 Bool jogar_novamente() {
@@ -114,4 +116,13 @@ Bool jogar_novamente() {
     getchar();
 
     return retorno;
+}
+
+
+void printar_titulo_jogo() {
+    printf(" _____                     _             _\n");
+    printf("|_   _|__ _ __ _ __ ___   (_)_ __   __ _| |\n");
+    printf("  | |/ _ \\ '__| '_ ` _ \\  | | '_ \\ / _` | |\n");
+    printf("  | |  __/ |  | | | | | |_| | | | | (_| | |\n");
+    printf("  |_|\\___|_|  |_| |_| |_(_)_|_| |_|\\__,_|_|\n");
 }

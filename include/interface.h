@@ -21,3 +21,6 @@ void rotina_derrota();
 
 // Funncao que exibe e captura a rotina de jogar novamente
 Bool jogar_novamente();
+
+// Funcao que exibe o titulo do jogo
+void printar_titulo_jogo();
