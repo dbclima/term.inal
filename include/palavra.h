@@ -67,7 +67,7 @@ void converter_palavra_string(Palavra *p_palavra, char *p_buffer, Bool espaco_en
     // p_buffer = string que armazenara a conversao
 
 // Funcao que permite trocar a cor de uma letra na palavra na posicao indice
-Status trocar_cor_letra_em_palavra(Palavra *p_palavra, Cor cor, int indice);
+Status trocar_cor_letra_em_palavra_idx(Palavra *p_palavra, Cor cor, int indice);
     // p_palavra = ponteiro para a palavra que deve ser modificada
     // cor = cor que deve ser aplicada a palavra
     // indice = indice da letra que dele ser modificada
@@ -82,3 +82,11 @@ Status printar_palavra(Palavra *p_palavra, char *p_buffer_offset, Bool espaco_en
 Status printar_teclado(Palavra *p_teclado, char* p_buffer_offset);
     // p_teclado = ponteiro para o teclado
     // p_buffer_offset = ponteiro para o buffer de offset (formatacao)
+
+Status iniciar_teclado(Palavra *p_teclado);
+
+Bool processar_nova_palavra(Palavra *p_teclado, char *palavra_chave, char *palavraTentativa, Palavra *p_palavras, int tentativaAtual);
+
+void deletar_palavras(Palavra *p_palavras, int numero_palavras);
+
+void deletar_teclado(Palavra *p_teclado);

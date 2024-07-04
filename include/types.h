@@ -3,7 +3,8 @@
 typedef enum {
     NONE,
     AMARELO,
-    VERDE
+    VERDE,
+    VERMELHO
 } Cor;
 
 typedef enum {
@@ -25,10 +26,3 @@ typedef enum {
     ERRO_CHAMADA_INVALIDA,
     ERRO_ARQUIVO_VAZIO,
 } Status;
-
-typedef enum {
-    NO_WARNINGS = 1,
-    PALAVRA_REPETIDA = 2,
-    NUMERO_LETRAS_INVALIDO = 3,
-    CARACTERE_INVALIDO = 5,
-} Warning;

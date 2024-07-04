@@ -5,7 +5,7 @@
 #define BG_VERDE_FG_BRANCO              "\033[1;37;42m"
 #define BG_NONE_FG_BRANCO               "\033[1;37m"
 #define BG_NONE_FG_NONE                 "\033[0m"
-#define BG_NONE_FG_VERMELHO             "\033[1;31m"
+#define BG_VERMELHO_FG_BRANCO             "\033[1;37;41m"
 
 #define LETRAS_POR_PALAVRAS             5           // Quantidade de letras por palavra
 #define MAXIMO_LETRAS_POR_PALAVRA       100         // Maximo de 100 letras por palavra
