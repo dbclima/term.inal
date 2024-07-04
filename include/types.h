@@ -3,7 +3,8 @@
 typedef enum {
     NONE,
     AMARELO,
-    VERDE
+    VERDE,
+    VERMELHO
 } Cor;
 
 typedef enum {

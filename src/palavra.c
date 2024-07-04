@@ -38,6 +38,9 @@ void converter_letra_string(Letra *p_letra, char *p_buffer, Bool espaco_entre_le
         case VERDE:
             strcpy(modificador_cor_entrada, BG_VERDE_FG_BRANCO);
             break;
+        case VERMELHO:
+            strcpy(modificador_cor_entrada, BG_NONE_FG_VERMELHO);
+            break;
     }
 
     sprintf(p_buffer, "%s%c%s", modificador_cor_entrada, p_letra->conteudo, modificador_cor_saida);
@@ -285,6 +288,7 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
     Letra *letraAuxiliarVerde;
     letraAuxiliarVerde = palavraTentativaOriginal.p_primeira_letra;
 
+
     for (int i = 0; i < get_tamanho_palavra(&palavraTentativaOriginal);i++){
         if(palavraChaveAtual[i] == letraAuxiliarVerde->conteudo){
             trocar_cor_letra_em_palavra_idx(&palavra_fim, VERDE, i);
@@ -292,6 +296,10 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
             trocar_cor_letra_em_teclado_char(p_teclado, VERDE, palavraChaveAtual[i]);
             palavraChaveAtual[i] = '-';
             contador++;
+        }
+        else
+        {
+            trocar_cor_letra_em_teclado_char(p_teclado, VERMELHO, palavraTentativa[i]);
         }
             letraAuxiliarVerde = letraAuxiliarVerde->p_proxima;
     }
