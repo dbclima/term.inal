@@ -39,6 +39,12 @@ int main(int argc, char **argv) {
 
     //rotina_fim_de_jogo();
 
+    deletar_palavras(p_palavras, numero_tentativas);
+    deletar_teclado(p_teclado);
+
+    free(p_palavras);
+    free(p_teclado);
+
     return 0;
 }
 

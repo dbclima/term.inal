@@ -18,8 +18,7 @@ build/interface.o: src/interface.c include/interface.h
 	$(CC) -c src/interface.c -o build/interface.o $(CFLAGS)
 
 dirs:
-	rd /s /q bin build
-	mkdir bin build
+	mkdir -p bin build
 
 clean:
 	rm -f bin/* build/*.o

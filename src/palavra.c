@@ -39,7 +39,7 @@ void converter_letra_string(Letra *p_letra, char *p_buffer, Bool espaco_entre_le
             strcpy(modificador_cor_entrada, BG_VERDE_FG_BRANCO);
             break;
         case VERMELHO:
-            strcpy(modificador_cor_entrada, BG_NONE_FG_VERMELHO);
+            strcpy(modificador_cor_entrada, BG_VERMELHO_FG_BRANCO);
             break;
     }
 
@@ -330,9 +330,23 @@ Bool processar_nova_palavra(Palavra *p_teclado, char* palavra_chave, char *palav
 
 
     if(contador == 5){
+        iniciar_teclado(p_teclado);
         return TRUE;
     }
 
 
     return FALSE;
 }
+
+void deletar_palavras(Palavra *p_palavras, int numero_palavras){
+
+    for (int i = 0; i < numero_palavras;i++){
+        deletar_palavra(p_palavras + i);
+    }
+}
+
+void deletar_teclado(Palavra *p_teclado){
+    for (int i = 0; i < 3;i++){
+        deletar_palavra(p_teclado + i);
+    }
+};

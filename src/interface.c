@@ -4,6 +4,7 @@
 #include "types.h"
 #include "config.h"
 #include "palavra.h"
+#include <ctype.h>
 
 #include "interface.h"
 
@@ -26,7 +27,7 @@ int capturar_dificuldade(){
 }
 
 void printar_warning(char *p_buffer_warning) {
-    printf("\n%s%s%s\n", BG_NONE_FG_VERMELHO, p_buffer_warning, BG_NONE_FG_NONE);
+    printf("\n%s%s%s\n", BG_VERMELHO_FG_BRANCO, p_buffer_warning, BG_NONE_FG_NONE);
     p_buffer_warning[0] = '\0';
 }
 
@@ -35,6 +36,11 @@ int receber_input_usuario(char *tentativa, char *p_buffer_warning, Palavra *p_pa
     int erro = 0;
     printf("Digite uma tentativa de palavra: ");
     fscanf(stdin, "%[^\n]", tentativa);
+
+    for (int i = 0; i < strlen(tentativa);i++){
+        tentativa[i] = tolower(tentativa[i]);
+    }
+
     getchar();
 
     // Detecção de erro de palavra repetida
