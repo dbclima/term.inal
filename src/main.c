@@ -21,8 +21,7 @@ int main(int argc, char **argv) {
     // Pessoa 1
 
     Bool continuar_jogo = TRUE;
-    //int numero_tentativas = capturar_dificuldade();
-    int numero_tentativas = 5;
+    int numero_tentativas = capturar_dificuldade(); // Pessoa 3
     Palavra *p_palavras = (Palavra *)malloc(sizeof(Palavra) * numero_tentativas);
     Palavra *p_teclado = (Palavra *)malloc(sizeof(Palavra) * 3);
 
@@ -74,7 +73,7 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         }        
 
         // Pessoa 3
-        if((qtde_erros = receber_input_usuario(tentativa, buffer_warning)) != 0){
+        if((qtde_erros = receber_input_usuario(tentativa, buffer_warning, p_palavras, tentativa_atual)) != 0){
             continue;
         }
         
