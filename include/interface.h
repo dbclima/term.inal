@@ -3,6 +3,15 @@
 #include "types.h"
 #include "config.h"
 
+// Funcao que captura e retorna o número de tentativas máximo
+int capturar_dificuldade(); 
+
+// Funcao que exibe o warning referente a ultima jogada
+void printar_warning(char *p_buffer_warning);
+
+// Funcao que recebe o input do usuario e relata eventuais erros
+int receber_input_usuario(char *tentativa, char *p_buffer_warning);
+
 // Funcao que exibe a rotina de vitoria
 void rotina_vitoria();
 
@@ -11,9 +20,3 @@ void rotina_derrota();
 
 // Funncao que exibe e captura a rotina de jogar novamente
 Bool jogar_novamente();
-
-// Funcao que exibe o warning referente a ultima jogada
-void printar_warning(char *p_buffer_warning);
-
-// Funcao que recebe o input do usuario e relata eventuais erros
-int receber_input_usuario(char *tentativa, char *p_buffer_warning);

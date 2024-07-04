@@ -21,8 +21,7 @@ int main(int argc, char **argv) {
     // Pessoa 1
 
     Bool continuar_jogo = TRUE;
-    //int numero_tentativas = capturar_dificuldade();
-    int numero_tentativas = 5;
+    int numero_tentativas = capturar_dificuldade();
     Palavra *p_palavras = (Palavra *)malloc(sizeof(Palavra) * numero_tentativas);
     Palavra *p_teclado = (Palavra *)malloc(sizeof(Palavra) * 3);
 

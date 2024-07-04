@@ -6,34 +6,22 @@
 
 #include "interface.h"
 
-void rotina_vitoria() {
-    system("clear");
-    printf("\n\n\n%sVitoria!\n\n\n\n", OFFSET_PALAVRAS);
-}
+int capturar_dificuldade(){
+    int num_tentativas = -1;
+    while(num_tentativas < 3 || num_tentativas > 20){
+        printf("Digite o numero de tentativas (entre 3 e 20): ");
+        scanf("%d", &num_tentativas);
+        
+        if(num_tentativas < 3 || num_tentativas > 20){
+            printf("Tentativa invalida!\n");
+        }
 
-void rotina_derrota() {
-    system("clear");
-    printf("\n\n\n%sDerrota!\n\n\n\n", OFFSET_PALAVRAS);
-}
-
-Bool jogar_novamente() {
-    Bool retorno;
-    printf("Deseja jogar novamente? [s/n]: ");
-
-    switch(getchar()) {
-        case 's':
-        case 'S':
-            retorno = TRUE;
-            break;
-        case 'n':
-        case 'N':
-        default:
-            retorno = FALSE;
-            break;
+        // Verifica por caracteres apos o numero 
+        while (getchar() != '\n'){
+            continue;
+        }
     }
-    getchar();
-
-    return retorno;
+    return num_tentativas;
 }
 
 void printar_warning(char *p_buffer_warning) {
@@ -41,7 +29,7 @@ void printar_warning(char *p_buffer_warning) {
     p_buffer_warning[0] = '\0';
 }
 
-// Retorna 0 se não houver erro
+
 int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
     int erro = 0;
     printf("Digite uma tentativa de palavra: ");
@@ -70,4 +58,34 @@ int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
     }
 
     return erro;
+}
+
+void rotina_vitoria() {
+    system("clear");
+    printf("\n\n\n%sVitoria!\n\n\n\n", OFFSET_PALAVRAS);
+}
+
+void rotina_derrota() {
+    system("clear");
+    printf("\n\n\n%sDerrota!\n\n\n\n", OFFSET_PALAVRAS);
+}
+
+Bool jogar_novamente() {
+    Bool retorno;
+    printf("Deseja jogar novamente? [s/n]: ");
+
+    switch(getchar()) {
+        case 's':
+        case 'S':
+            retorno = TRUE;
+            break;
+        case 'n':
+        case 'N':
+        default:
+            retorno = FALSE;
+            break;
+    }
+    getchar();
+
+    return retorno;
 }
