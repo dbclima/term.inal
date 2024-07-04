@@ -3,6 +3,7 @@
 #include <string.h>
 #include "types.h"
 #include "config.h"
+#include "palavra.h"
 
 #include "interface.h"
 
@@ -30,16 +31,35 @@ void printar_warning(char *p_buffer_warning) {
 }
 
 
-int receber_input_usuario(char *tentativa, char* p_buffer_warning) {
+int receber_input_usuario(char *tentativa, char *p_buffer_warning, Palavra *p_palavras, int tentativa_atual) {
     int erro = 0;
     printf("Digite uma tentativa de palavra: ");
     fscanf(stdin, "%[^\n]", tentativa);
     getchar();
 
     // Detecção de erro de palavra repetida
-    if(0 == 1){
-        strcat(p_buffer_warning, "Erro: Palavra tentada anteriormente.\n");
-        erro++;
+    int i = 0;
+    while(i < tentativa_atual){     
+        int j = 0;
+        Bool palavras_diferentes = FALSE;
+        Letra *aux = p_palavras[i].p_primeira_letra; // Ponteiro para percorrer a palavra atual
+
+        while(aux != NULL){
+            // Caso alguma letra seja diferente, já sabemos que a palvra é falsa
+            if(aux->conteudo != tentativa[j]){
+                palavras_diferentes = TRUE;
+                break;
+            };
+            j++;
+            aux = aux->p_proxima;
+        }
+
+        if(palavras_diferentes == FALSE){
+            strcat(p_buffer_warning, "Erro: A palavra ja foi tentada anteriormente.\n");
+            erro++;
+            break;
+        }
+        i++;
     }
     
     // Detecção de erro de tamanho

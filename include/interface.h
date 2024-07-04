@@ -2,6 +2,7 @@
 
 #include "types.h"
 #include "config.h"
+#include "palavra.h"
 
 // Funcao que captura e retorna o número de tentativas máximo
 int capturar_dificuldade(); 
@@ -10,7 +11,7 @@ int capturar_dificuldade();
 void printar_warning(char *p_buffer_warning);
 
 // Funcao que recebe o input do usuario e relata eventuais erros
-int receber_input_usuario(char *tentativa, char *p_buffer_warning);
+int receber_input_usuario(char *tentativa, char *p_buffer_warning, Palavra *p_palavras, int tentativa_atual);
 
 // Funcao que exibe a rotina de vitoria
 void rotina_vitoria();
