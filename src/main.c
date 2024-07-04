@@ -59,15 +59,13 @@ int main(int argc, char **argv) {
     Palavra *p_palavras = (Palavra *)malloc(sizeof(Palavra) * numero_tentativas);
     Palavra *p_teclado = (Palavra *)malloc(sizeof(Palavra) * 3);
 
-    char palavra_chave[6] = "diogo";
-
     // Pessoa 2
     if (iniciar_teclado(p_teclado) != OK) {
         
     }
 
     while (continuar_jogo) {
-        sortear_palavra(palavra_chave); // Pessoa 1 - feito
+        // sortear_palavra(palavra_chave); // Pessoa 1 - feito
         continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, p_teclado);
     }
 
@@ -98,11 +96,11 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         //printf("%d %d\n", tentativa_atual, numero_tentativas);
         
         // Pessoa 4 - Feito
-        for (int i = 0; i < tentativa_atual; i++) {
+        for (int i = 0; i < ((flag_endgame == 1 || flag_endgame == -1) ? tentativa_atual + 1 : tentativa_atual) ; i++) {
             printar_palavra(&p_palavras[i], OFFSET_PALAVRAS, FALSE);
         }
 
-        for (int i = tentativa_atual; i < numero_tentativas; i++) {
+        for (int i = tentativa_atual; i < ((flag_endgame == 1 || flag_endgame == -1) ? numero_tentativas - 1 : numero_tentativas); i++) {
             printf("%s_____\n", OFFSET_PALAVRAS);
         }
 
@@ -133,6 +131,7 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
             // Pessoa 4 - Feito
             
             flag_endgame = 1;
+            continue;
         }
         tentativa_atual++;
 
