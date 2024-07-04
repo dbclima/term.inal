@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     Palavra *p_palavras = (Palavra *)malloc(sizeof(Palavra) * numero_tentativas);
     Palavra *p_teclado = (Palavra *)malloc(sizeof(Palavra) * 3);
 
-    char palavra_chave[6] = "teste";
+    char palavra_chave[6] = "diogo";
 
     // Pessoa 2
     if (iniciar_teclado(p_teclado) != OK) {

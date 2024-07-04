@@ -67,7 +67,7 @@ void converter_palavra_string(Palavra *p_palavra, char *p_buffer, Bool espaco_en
     // p_buffer = string que armazenara a conversao
 
 // Funcao que permite trocar a cor de uma letra na palavra na posicao indice
-Status trocar_cor_letra_em_palavra(Palavra *p_palavra, Cor cor, int indice);
+Status trocar_cor_letra_em_palavra_idx(Palavra *p_palavra, Cor cor, int indice);
     // p_palavra = ponteiro para a palavra que deve ser modificada
     // cor = cor que deve ser aplicada a palavra
     // indice = indice da letra que dele ser modificada
