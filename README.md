@@ -7,13 +7,13 @@ O projeto foi inspirado noi jogo [term.ooo](https://term.ooo/) adaptado ao termi
 
 ## Alunos
 - Antônio Pedro Corrêa Rodrigues
-    - 123...
+    - DRE: 123675045
 - Diogo Bernardo Corrêa Lima
     - DRE: 123706511
 - João Victor Fittipaldi Binda Magno
     - DRE: 123711443
-- Sylvio Heltt
-    - DRE: 123...
+- Sylvio Jorge Pastene Helt
+    - DRE: 123675265
 
 ## Regras do Jogo
 **Descrição Regras**
