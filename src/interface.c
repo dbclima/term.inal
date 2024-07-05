@@ -94,8 +94,8 @@ void rotina_vitoria() {
     printf("%sVitoria!%s ", BG_VERDE_FG_BRANCO, BG_NONE_FG_NONE);
 }
 
-void rotina_derrota() {
-    printf("%sDerrota!%s ", BG_VERMELHO_FG_BRANCO, BG_NONE_FG_NONE);
+void rotina_derrota(char* palavra_chave) {
+    printf("%sDerrota! Palavra era: \"%s\"%s ", BG_VERMELHO_FG_BRANCO, palavra_chave, BG_NONE_FG_NONE);
 }
 
 Bool jogar_novamente() {

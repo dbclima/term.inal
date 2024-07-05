@@ -67,11 +67,9 @@ int main(int argc, char **argv) {
     }
 
     while (continuar_jogo) {
-        // sortear_palavra(palavra_chave); // Pessoa 1 - feito
+        sortear_palavra(palavra_chave); // Pessoa 1 - feito
         continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, p_teclado);
     }
-
-    //rotina_fim_de_jogo();
 
     deletar_palavras(p_palavras, numero_tentativas);
     deletar_teclado(p_teclado);
@@ -117,7 +115,7 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
         }        
 
         if (flag_endgame) {
-            if (flag_endgame == -1) rotina_derrota();
+            if (flag_endgame == -1) rotina_derrota(palavra_chave);
             else rotina_vitoria();
             return jogar_novamente();
         }
