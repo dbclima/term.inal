@@ -17,7 +17,7 @@ int receber_input_usuario(char *tentativa, char *p_buffer_warning, Palavra *p_pa
 void rotina_vitoria();
 
 // Funcao que exibe a rotina de derrota
-void rotina_derrota();
+void rotina_derrota(char* palavra_chave);
 
 // Funncao que exibe e captura a rotina de jogar novamente
 Bool jogar_novamente();
