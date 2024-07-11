@@ -3,7 +3,7 @@
 ## Descrição
 O projeto `term.inal` foi é um projeto por estudantes da **UFRJ** da disciplina Programação de Computadores II 24.1
 
-O projeto foi inspirado noi jogo [term.ooo](https://term.ooo/) adaptado ao terminal.
+O projeto foi inspirado no jogo [term.ooo](https://term.ooo/) adaptado ao terminal.
 
 ## Alunos
 - Antônio Pedro Corrêa Rodrigues
@@ -16,7 +16,11 @@ O projeto foi inspirado noi jogo [term.ooo](https://term.ooo/) adaptado ao termi
     - DRE: 123675265
 
 ## Regras do Jogo
-**Descrição Regras**
+O jogador deve adivinhar uma palavra de cinco letras sorteada aleatoreamente dentre uma série de palavras em um banco. Antes do jogo começar, é possível adicionar novas palavras ao banco por meio da flag -add quando o programa é executado.
+
+O usuário deve escolher um número de tentativas entre 3 e 20, que estabelecerá a dificuldade do jogo. Em cada tentativa, caso uma letra esteja presente na palavra correta e na posição correta, sua cor muda para verde. Caso a letra esteja na palavra correta, mas numa posição incorreta, sua cor muda para amarelo. Caso não esteja presente na palavra, sua cor muda para vermelho no teclado com as letras já testadas.
+
+O jogo acaba quando o usuário chega ao número máximo de tentativas e não acerta, perdendo o jogo ou quando o usuário acerta. Após isso, é possível jogar novamente.
 
 
 ## Pseudo Código:
