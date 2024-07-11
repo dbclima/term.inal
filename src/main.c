@@ -8,18 +8,11 @@
 #include "interface.h"
 #include "sorteio.h"
 
-/*
- * Pessoa 1: Joo Binda - feito
- * Pessoa 2: Antonio Predo Corra
- * Pessoa 3: Sylvio
- * Pessoa 4: Diogo Corra Lima - feito
- */
-
 Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, Palavra *p_teclado);
 
 int main(int argc, char **argv) {
+    
     // Tratar argumentos do programa
-    // Pessoa 1 - feito
     Status status = OK;
     if(argc > 1){
         if(argc <= 2){
@@ -53,7 +46,8 @@ int main(int argc, char **argv) {
         }
         return status;
     }
-
+    
+    // Cria variáveis que armazenam tentativas anteriores e teclado
     Bool continuar_jogo = TRUE;
     int numero_tentativas = capturar_dificuldade(); // Pessoa 3
     Palavra *p_palavras = (Palavra *)malloc(sizeof(Palavra) * numero_tentativas);
@@ -61,19 +55,17 @@ int main(int argc, char **argv) {
 
     char palavra_chave[6];
 
-    // Pessoa 2
-    if (iniciar_teclado(p_teclado) != OK) {
-        
-    }
+    iniciar_teclado(p_teclado);
 
+    // Execução do programa a cada rodada
     while (continuar_jogo) {
-        sortear_palavra(palavra_chave); // Pessoa 1 - feito
+        sortear_palavra(palavra_chave); 
         continuar_jogo = loop_jogo(p_palavras, numero_tentativas, palavra_chave, p_teclado);
     }
 
+    // Libera a memória alocada durante a execução
     deletar_palavras(p_palavras, numero_tentativas);
     deletar_teclado(p_teclado);
-
     free(p_palavras);
     free(p_teclado);
 
@@ -93,20 +85,17 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
     while(tentativa_atual < numero_tentativas) {
         system("clear");
         strcpy(tentativa, "");
-        //printf("%d %d\n", tentativa_atual, numero_tentativas);
-        
-        // Pessoa 4 - Feito
+
+        // Exibe em tela tentativas anteriores
         for (int i = 0; i < ((flag_endgame == 1 || flag_endgame == -1) ? tentativa_atual + 1 : tentativa_atual) ; i++) {
             printar_palavra(&p_palavras[i], OFFSET_PALAVRAS, FALSE);
         }
-
         for (int i = tentativa_atual; i < ((flag_endgame == 1 || flag_endgame == -1) ? numero_tentativas - 1 : numero_tentativas); i++) {
             printf("%s_____\n", OFFSET_PALAVRAS);
         }
 
+        // Exibe teclado e warnings anteriores
         printf("\n");
-
-        // Pessoa 4 - Feito
         printar_teclado(p_teclado, OFFSET_TECLADO);
         printar_warning(buffer_warning);
 
@@ -114,27 +103,27 @@ Bool loop_jogo(Palavra *p_palavras, int numero_tentativas, char *palavra_chave, 
             printf("\n");
         }        
 
+        // Rotina caso jogo chegue ao fim
         if (flag_endgame) {
             if (flag_endgame == -1) rotina_derrota(palavra_chave);
             else rotina_vitoria();
             return jogar_novamente();
         }
 
-        // Pessoa 3
+        // Não incrementa número de tentativas caso haja erros
         if((qtde_erros = receber_input_usuario(tentativa, buffer_warning, p_palavras, tentativa_atual)) != 0){
             continue;
         }
-        
-        // Pessoa 2
+
+        // Verifica condição de vitória
         if (processar_nova_palavra(p_teclado, palavra_chave,tentativa, p_palavras,tentativa_atual)) {
-            
-            // Pessoa 4 - Feito
-            
             flag_endgame = 1;
             continue;
         }
+        
         tentativa_atual++;
-
+        
+        // Verifica condição de derrota  
         if (tentativa_atual == numero_tentativas) {
             flag_endgame = -1;
             tentativa_atual--;
