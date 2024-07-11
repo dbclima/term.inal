@@ -2,8 +2,10 @@
 
 ## Iniciliazação do programa
 Primeiramente, compile o código com o comando 'make'. Certifique-se de que você está no diretório do programa
+
 Para rodar o jogo -> ./bin/main
-Adicionar palavra no banco de palavras -> /bin/main --add palavra1 palavra2 palavraN
+
+Adicionar palavra no banco de palavras -> ./bin/main --add palavra1 palavra2 palavraN
 
 ## Descrição
 O projeto `term.inal` foi é um projeto por estudantes da **UFRJ** da disciplina Programação de Computadores II 24.1
