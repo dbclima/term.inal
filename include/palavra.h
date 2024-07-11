@@ -83,10 +83,14 @@ Status printar_teclado(Palavra *p_teclado, char* p_buffer_offset);
     // p_teclado = ponteiro para o teclado
     // p_buffer_offset = ponteiro para o buffer de offset (formatacao)
 
+// Inicia teclado como um array de três palavras
 Status iniciar_teclado(Palavra *p_teclado);
 
+// verifica cada tentativa e compara com a palavra chave, processando a palavra com base nas regras do jogo. Também, atualiza o teclado de acordo com a tentiva de cada palavra.
 Bool processar_nova_palavra(Palavra *p_teclado, char *palavra_chave, char *palavraTentativa, Palavra *p_palavras, int tentativaAtual);
 
+// libera a palavra da memória
 void deletar_palavras(Palavra *p_palavras, int numero_palavras);
 
+// libera o teclado da memória
 void deletar_teclado(Palavra *p_teclado);
